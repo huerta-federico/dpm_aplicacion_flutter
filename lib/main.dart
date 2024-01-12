@@ -17,15 +17,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Mi primera aplicación en Flutter",
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       debugShowCheckedModeBanner: false,
-      //home: const SplashScreen(),
         initialRoute: 'splash',
 
       routes: {
         'home': (_) => const HomeScreen(),
         'buscar': (_) => const BuscarScreen(),
         'carrito': (_) => const CarritoScreen(),
-        'catalogo': (_) => const CatalogoScreen(),
+        'catalogo': (_) => CatalogoScreen(),
         'perfil': (_) => const PerfilScreen(),
         'splash': (_) => const SplashScreen(),
       }

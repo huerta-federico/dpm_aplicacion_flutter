@@ -21,27 +21,31 @@ class _SplashState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.black54,
+    return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             Text(
-              "¡Bienvenido a mi aplicación!",
-              style: TextStyle(color: Colors.white, fontSize: 40),
+              'Cargando...',
+              style: TextStyle(
+                  color: Colors.blue[900],
+                  fontSize: 40,
+                  shadows: const [
+                    Shadow(
+                        blurRadius: 20,
+                        color: Colors.blue,
+                        offset: Offset(2, 2))
+                  ]),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Text(
-              "Cargando...",
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            ),
-            Expanded(
+            const Expanded(
               flex: 2,
               child: Column(
                 children: <Widget>[

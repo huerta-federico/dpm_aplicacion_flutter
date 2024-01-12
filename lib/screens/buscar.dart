@@ -8,72 +8,120 @@ class BuscarScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.deepPurple[100],
+          backgroundColor: Colors.blue[300],
           title: Text(
             "Buscar",
-            style: TextStyle(color: Colors.deepPurple[600]),
+            style: TextStyle(color: Colors.blue[900]),
           ),
           actions: <Widget>[
             ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                ),
                 onPressed: () {
-                  Navigator.pushNamed(context, 'home');
+                  Navigator.pushReplacementNamed(context, 'home');
                 },
-                icon: const Icon(Icons.home),
-                label: const Text("Inicio")),
+                icon: const Icon(
+                  Icons.home,
+                ),
+                label: const Text(
+                  "Inicio",
+                )),
             const SizedBox(
               width: 10,
             ),
             ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, 'catalogo');
                 },
-                icon: const Icon(Icons.shelves),
+                icon: const Icon(
+                  Icons.shelves,
+                ),
                 label: const Text("Catálogo")),
             const SizedBox(
               width: 10,
             ),
             ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, 'buscar');
                 },
-                icon: const Icon(Icons.search),
+                icon: const Icon(
+                  Icons.search,
+                ),
                 label: const Text("Buscar")),
             const SizedBox(
               width: 10,
             ),
             ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, 'carrito');
                 },
-                icon: const Icon(Icons.shopping_cart),
+                icon: const Icon(
+                  Icons.shopping_cart,
+                ),
                 label: const Text("Mi carrito")),
             const SizedBox(
               width: 10,
             ),
             ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, 'perfil');
                 },
-                icon: const Icon(Icons.account_box),
+                icon: const Icon(
+                  Icons.account_box,
+                ),
                 label: const Text("Mi perfil")),
             const SizedBox(
               width: 10,
             ),
           ],
         ),
-        body: SingleChildScrollView(
-            child: Container(
-                child: Column(children: [
-          Container(
-              width: 700,
-              height: 550,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  image: const DecorationImage(
-                      image: NetworkImage(
-                          'https://1.bp.blogspot.com/-ch-4qlvZwCA/VB8f0HHRQyI/AAAAAAABLvA/wszcnHtPcyo/s1600/cute-dog-picture-039-06.jpg'),
-                      fit: BoxFit.cover)))
-        ]))));
+        body: Center(
+            child: Column(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            child: TextField(
+              style: TextStyle(color: Colors.blue[900],),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 1.0),
+                  borderRadius: BorderRadius.circular(25.0),),
+                focusedBorder:OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                  borderRadius: BorderRadius.circular(25.0),),
+                hintText: 'Escriba el nombre del producto',
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.blue,
+            ),
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+            label: const Text("Buscar", style: TextStyle(fontSize: 20)),
+          ),
+        ])));
   }
 }
