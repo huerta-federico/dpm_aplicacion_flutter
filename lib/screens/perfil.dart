@@ -1,9 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' as rootBundle;
-
-import '../providers/provider_product.dart';
 
 class PerfilScreen extends StatelessWidget {
   const PerfilScreen({super.key});
@@ -98,101 +93,153 @@ class PerfilScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: FutureBuilder(
-          future: ReadJsonData(),
-          builder: (context, data) {
-
-            if (data.hasError) {
-              return Center(child: Text("${data.error}"));
-            } else if (data.hasData) {
-              var items = data.data as List<ProductDataModel>;
-
-              return ListView.builder(
-                  itemCount: items == null ? 0 : items.length,
-                  itemBuilder: (context, index) {
-
-                    return
-
-                      Card(
-                      elevation: 5,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 6),
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 80,
-                              height: 50,
-                              child: Image(
-                                image: NetworkImage(
-                                    items[index].imageURL.toString()),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.only(bottom: 8),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 8),
-                                      child: Text(
-                                        items[index].name.toString(),
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 8),
-                                      child: Text(
-                                          items[index].oldPrice.toString()),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  });
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ));
-  }
-
-/*
+        body: Center(
             child: Column(children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text(
-            'Datos de perfil',
+          const Text(
+            'Inicio de sesión',
             style: TextStyle(color: Colors.blue, fontSize: 40, shadows: [
               Shadow(blurRadius: 20, color: Colors.blue, offset: Offset(2, 2))
             ]),
           ),
-        ])),
-
-*/
-}
-
-Future<List<ProductDataModel>> ReadJsonData() async {
-  final jsondata =
-      await rootBundle.rootBundle.loadString('data/productos.json');
-  final list = json.decode(jsondata) as List<dynamic>;
-
-  return list.map((e) => ProductDataModel.fromJson(e)).toList();
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: TextField(
+              style: TextStyle(
+                color: Colors.blue[900],
+              ),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 1.0),
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                hintText: 'Escriba su correo',
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: TextField(
+              obscureText: true,
+              style: TextStyle(
+                color: Colors.blue[900],
+              ),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 1.0),
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                hintText: 'Escriba su contraseña',
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                ),
+                onPressed: () {},
+                icon: const Icon(Icons.login),
+                label: const Text("Iniciar sesión",
+                    style: TextStyle(fontSize: 20)),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.orange,
+                ),
+                onPressed: () {},
+                icon: const Icon(Icons.help),
+                label: const Text("Recuperar contraseña",
+                    style: TextStyle(fontSize: 20)),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.blue,
+            ),
+            onPressed: () {},
+            icon: const Icon(Icons.person_add),
+            label: const Text("Crear cuenta", style: TextStyle(fontSize: 20)),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.blue,
+              backgroundColor: Colors.white,
+            ),
+            onPressed: () {},
+            icon: Image.asset(
+              "assets/logo_google.png",
+              width: 20,
+              height: 20,
+              fit: BoxFit.cover,
+            ),
+            label: const Text("Conectar con Google",
+                style: TextStyle(fontSize: 20)),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.blue,
+              backgroundColor: Colors.white,
+            ),
+            onPressed: () {},
+            icon: Image.asset(
+              "assets/logo_facebook.png",
+              width: 20,
+              height: 20,
+              fit: BoxFit.cover,
+            ),
+            label: const Text("Conectar con Facebook",
+                style: TextStyle(fontSize: 20)),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.blue,
+              backgroundColor: Colors.white,
+            ),
+            onPressed: () {},
+            icon: Image.asset(
+              "assets/logo_microsoft.png",
+              width: 20,
+              height: 20,
+              fit: BoxFit.cover,
+            ),
+            label: const Text("Conectar con Microsoft",
+                style: TextStyle(fontSize: 20)),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+        ])));
+  }
 }

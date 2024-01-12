@@ -1,3 +1,4 @@
+import 'package:dpm_aplicacion_flutter/screens/cats.dart';
 import 'package:flutter/material.dart';
 import 'package:dpm_aplicacion_flutter/screens/splash.dart';
 import 'package:dpm_aplicacion_flutter/screens/home.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Mi primera aplicación en Flutter",
+      title: "Tienda eCommerce",
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -27,9 +28,10 @@ class MyApp extends StatelessWidget {
         'home': (_) => const HomeScreen(),
         'buscar': (_) => const BuscarScreen(),
         'carrito': (_) => const CarritoScreen(),
-        'catalogo': (_) => CatalogoScreen(),
+        'catalogo': (_) => const CatalogoScreen(),
         'perfil': (_) => const PerfilScreen(),
         'splash': (_) => const SplashScreen(),
+        'cats': (_) => CatsScreen(),
       }
     );
   }

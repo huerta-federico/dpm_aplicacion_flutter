@@ -381,7 +381,7 @@ class CarritoScreen extends StatelessWidget {
                           ),
                           onPressed: () {},
                           child: const Text(
-                            'Ir a Checkout',
+                            'Ir a Checkout', style: TextStyle(fontSize: 20),
                           )),
                       const SizedBox(
                         height: 15,
@@ -393,7 +393,7 @@ class CarritoScreen extends StatelessWidget {
                           ),
                           onPressed: () {},
                           child: const Text(
-                            'Eliminar carrito',
+                            'Eliminar carrito', style: TextStyle(fontSize: 20),
                           )),
                     ],
                   ),

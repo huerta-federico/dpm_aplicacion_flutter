@@ -1,19 +1,9 @@
-// import 'package:dpm_aplicacion_flutter/logic/models/mysql.dart';
 import 'package:flutter/material.dart';
+import 'package:dpm_aplicacion_flutter/microservices/catalogo/providers/provider_product.dart';
+import 'package:dpm_aplicacion_flutter/microservices/catalogo/functions.dart';
 
-class CatalogoScreen extends StatefulWidget {
+class CatalogoScreen extends StatelessWidget {
   const CatalogoScreen({super.key});
-
-  @override
-  State<CatalogoScreen> createState() {
-    return _CatalogoScreenState();
-  }
-}
-
-class _CatalogoScreenState extends State<CatalogoScreen> {
-  static String nombreProducto = 'Nombre de producto';
-  static String lorem =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Magna fermentum iaculis eu non diam phasellus vestibulum. Mi quis hendrerit dolor magna eget est. Justo nec ultrices dui sapien eget. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed.';
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +12,7 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
         appBar: AppBar(
           backgroundColor: Colors.blue[300],
           title: Text(
-            "Catálogo",
+            "Mi perfil",
             style: TextStyle(color: Colors.blue[900]),
           ),
           actions: <Widget>[
@@ -105,367 +95,120 @@ class _CatalogoScreenState extends State<CatalogoScreen> {
             ),
           ],
         ),
-        body: Center(
-          child: Column(children: [
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              'Lista de productos',
-              style: TextStyle(color: Colors.blue, fontSize: 40, shadows: [
-                Shadow(blurRadius: 20, color: Colors.blue, offset: Offset(2, 2))
-              ]),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.blue,
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Todos',
-                    )),
-                const SizedBox(
-                  width: 10,
-                ),
-                TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.blue,
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Categoría 1',
-                    )),
-                const SizedBox(
-                  width: 10,
-                ),
-                TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.blue,
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Categoría 2',
-                    )),
-                const SizedBox(
-                  width: 10,
-                ),
-                TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.blue,
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Categoría 3',
-                    )),
-                const SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Card(
-                color: Colors.blue[50],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: const EdgeInsets.all(20),
-                elevation: 10,
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text(nombreProducto,
-                          style: TextStyle(
-                              color: Colors.blue[900],
-                              fontWeight: FontWeight.bold)),
-                      subtitle: Text(lorem,
-                          style: TextStyle(color: Colors.blue[900])),
-                      leading: const Icon(Icons.phone_android),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "\$ 99,00",
-                          style:
-                              TextStyle(color: Colors.blue[900], fontSize: 25),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Agregar al carrito',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Vista previa',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Ver detalles',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                )),
-            Card(
-                color: Colors.blue[50],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: const EdgeInsets.all(20),
-                elevation: 10,
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text('$nombreProducto 2',
-                          style: TextStyle(
-                              color: Colors.blue[900],
-                              fontWeight: FontWeight.bold)),
-                      subtitle: Text(lorem,
-                          style: TextStyle(color: Colors.blue[900])),
-                      leading: const Icon(
-                        Icons.phone_android,
+        body: FutureBuilder(
+          future: readJsonData(),
+          builder: (context, data) {
+            if (data.hasError) {
+              return Center(child: Text("${data.error}"));
+            } else if (data.hasData) {
+              var items = data.data as List<ProductDataModel>;
+
+              return ListView.builder(
+                  itemCount: items.isEmpty ? 0 : items.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      color: Colors.blue[50],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "\$ 199,00",
-                          style:
-                              TextStyle(color: Colors.blue[900], fontSize: 25),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
+                      margin: const EdgeInsets.all(10),
+                      elevation: 10,
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 80,
+                              height: 50,
+                              child: Image(
+                                image: NetworkImage(
+                                    items[index].imageURL.toString()),
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Agregar al carrito',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, right: 8),
+                                      child: Text(
+                                        items[index].name.toString(),
+                                        style: TextStyle(
+                                            color: Colors.blue[900],
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, right: 8),
+                                      child: Text(
+                                        '\$ ${items[index].oldPrice}',
+                                        style: TextStyle(
+                                            color: Colors.blue[900],
+                                            fontSize: 20),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Vista previa',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
+                            const SizedBox(
+                              width: 20,
                             ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Ver detalles',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                )),
-            Card(
-                color: Colors.blue[50],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: const EdgeInsets.all(20),
-                elevation: 10,
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text('$nombreProducto 3',
-                          style: TextStyle(
-                              color: Colors.blue[900],
-                              fontWeight: FontWeight.bold)),
-                      subtitle: Text(lorem,
-                          style: TextStyle(color: Colors.blue[900])),
-                      leading: const Icon(Icons.phone_android),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "\$ 299,00",
-                          style:
-                              TextStyle(color: Colors.blue[900], fontSize: 25),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.blue,
+                                ),
+                                onPressed: () {},
+                                child: const Text(
+                                  'Agregar al carrito',
+                                )),
+                            const SizedBox(
+                              width: 5,
                             ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Agregar al carrito',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.blue,
+                                ),
+                                onPressed: () {},
+                                child: const Text(
+                                  'Vista previa',
+                                )),
+                            const SizedBox(
+                              width: 5,
                             ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Vista previa',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.blue,
+                                ),
+                                onPressed: () {},
+                                child: const Text(
+                                  'Ver detalles',
+                                )),
+                            const SizedBox(
+                              width: 5,
                             ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Ver detalles',
-                            )),
-                        const SizedBox(
-                          width: 5,
+                          ],
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                )),
-            Card(
-                color: Colors.blue[50],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: const EdgeInsets.all(20),
-                elevation: 10,
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text('$nombreProducto 4',
-                          style: TextStyle(
-                              color: Colors.blue[900],
-                              fontWeight: FontWeight.bold)),
-                      subtitle: Text(lorem,
-                          style: TextStyle(color: Colors.blue[900])),
-                      leading: const Icon(Icons.phone_android),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "\$ 399,00",
-                          style:
-                              TextStyle(color: Colors.blue[900], fontSize: 25),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Agregar al carrito',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Vista previa',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor: Colors.blue,
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              'Ver detalles',
-                            )),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                )),
-          ]),
+                      ),
+                    );
+                  });
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         ));
   }
 }

@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
             width: 350,
             padding: const EdgeInsets.all(10),
             child: const Image(
-              image: AssetImage('assets/utpl_logo_2.png'),
+              image: AssetImage('assets/logo_utpl.png'),
               fit: BoxFit.scaleDown,
             ),
           ),
@@ -148,6 +148,24 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               )),
+          ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
+              ),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'cats');
+              },
+              icon: const Icon(
+                Icons.api,
+              ),
+              label: const Text(
+                "Prueba de TheCatAPI",
+              )),
+          Text(
+            "Botón temporal",
+            style: TextStyle(color: Colors.blue[900], fontSize: 12),
+          ),
         ],
       )),
     );

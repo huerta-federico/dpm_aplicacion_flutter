@@ -1,16 +1,29 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class BuscarScreen extends StatelessWidget {
-  const BuscarScreen({super.key});
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+class CatsScreen extends StatelessWidget {
+  const CatsScreen({super.key});
+
+  final String url = "https://api.thecatapi.com/v1/categories";
+
+  Future<dynamic> _getListado() async {
+    final respuesta = await http.get(Uri.parse(url));
+    if (respuesta.statusCode == 200) {
+      return jsonDecode(respuesta.body);
+    } else {
+      print("Error con la respuesta");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.blue[300],
           title: Text(
-            "Buscar",
+            "eCommerce",
             style: TextStyle(color: Colors.blue[900]),
           ),
           actions: <Widget>[
@@ -93,39 +106,26 @@ class BuscarScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: Center(
-            child: Column(children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-            child: TextField(
-              style: TextStyle(
-                color: Colors.blue[900],
-              ),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.blue, width: 1.0),
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.blue, width: 2.0),
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                hintText: 'Escriba el nombre del producto',
-              ),
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.blue,
-            ),
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-            label: const Text("Buscar", style: TextStyle(fontSize: 20)),
-          ),
-        ])));
+        body: FutureBuilder<dynamic>(
+          future: _getListado(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              print(snapshot);
+              return ListView(children: listado(snapshot.data));
+            } else {
+              print("No hay información");
+              return Text("Sin data");
+            }
+          },
+          initialData: const Center(child: CircularProgressIndicator()),
+        ));
   }
+}
+
+List<Widget> listado(List<dynamic> info) {
+  List<Widget> lista = [];
+  for (var elemento in info) {
+    lista.add(Text(elemento['name']));
+  }
+  return lista;
 }
