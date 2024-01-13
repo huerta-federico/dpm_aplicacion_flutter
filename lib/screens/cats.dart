@@ -110,7 +110,7 @@ class CatsScreen extends StatelessWidget {
           future: _getListado(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              print(snapshot);
+              // print(snapshot);
               return ListView(children: listado(snapshot.data));
             } else {
               print("No hay información");

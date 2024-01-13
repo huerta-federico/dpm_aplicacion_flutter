@@ -15,7 +15,7 @@ class _SplashState extends State<SplashScreen> {
   }
 
   _navigateToHome() async {
-    await Future.delayed(const Duration(milliseconds: 500), () {});
+    await Future.delayed(const Duration(milliseconds: 3000), () {});
     Navigator.pushReplacementNamed(context, 'home');
   }
 
@@ -50,7 +50,7 @@ class _SplashState extends State<SplashScreen> {
               child: Column(
                 children: <Widget>[
                   Image(
-                    image: AssetImage('assets/utpl_logo_2.png'),
+                    image: AssetImage('assets/logo_utpl.png'),
                     width: 400,
                     height: 300,
                     fit: BoxFit.scaleDown,
