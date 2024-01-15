@@ -1,109 +1,28 @@
+import 'package:dpm_aplicacion_flutter/components.ui/navigation.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+  final String title = ('eCommerce');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.blue[300],
-        title: Text(
-          "eCommerce",
-          style: TextStyle(color: Colors.blue[900]),
-        ),
-        actions: <Widget>[
-          ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
-              ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'home');
-              },
-              icon: const Icon(
-                Icons.home,
-              ),
-              label: const Text(
-                "Inicio",
-              )),
-          const SizedBox(
-            width: 10,
-          ),
-          ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, 'catalogo');
-              },
-              icon: const Icon(
-                Icons.shelves,
-              ),
-              label: const Text("Catálogo")),
-          const SizedBox(
-            width: 10,
-          ),
-          ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, 'buscar');
-              },
-              icon: const Icon(
-                Icons.search,
-              ),
-              label: const Text("Buscar")),
-          const SizedBox(
-            width: 10,
-          ),
-          ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, 'carrito');
-              },
-              icon: const Icon(
-                Icons.shopping_cart,
-              ),
-              label: const Text("Mi carrito")),
-          const SizedBox(
-            width: 10,
-          ),
-          ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, 'perfil');
-              },
-              icon: const Icon(
-                Icons.account_box,
-              ),
-              label: const Text("Mi perfil")),
-          const SizedBox(
-            width: 10,
-          ),
-        ],
-      ),
+      appBar: headerNav(title: title, context: context),
       body: Center(
-          child: Column(
+          child: ListView(
         children: <Widget>[
           const SizedBox(
             height: 20,
           ),
-          const Text(
-            'Título de tienda eCommerce',
-            style: TextStyle(color: Colors.blue, fontSize: 40, shadows: [
-              Shadow(blurRadius: 20, color: Colors.blue, offset: Offset(2, 2))
-            ]),
+          const Center(
+            child: Text(
+              'Título de tienda eCommerce',
+              style: TextStyle(color: Colors.blue, fontSize: 40, shadows: [
+                Shadow(blurRadius: 20, color: Colors.blue, offset: Offset(2, 2))
+              ]),
+            ),
           ),
           Container(
             height: 150,
@@ -117,10 +36,11 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Text(
+          Center(
+              child: Text(
             "Reemplazar por logotipo de eCommerce",
             style: TextStyle(color: Colors.blue[900], fontSize: 12),
-          ),
+          )),
           const SizedBox(
             height: 10,
           ),
@@ -148,26 +68,31 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               )),
-          ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
-              ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'cats');
-              },
-              icon: const Icon(
-                Icons.api,
-              ),
-              label: const Text(
-                "Prueba de TheCatAPI",
-              )),
-          Text(
-            "Botón temporal",
-            style: TextStyle(color: Colors.blue[900], fontSize: 12),
+          Center(
+            child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
+                ),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, 'cats');
+                },
+                icon: const Icon(
+                  Icons.api,
+                ),
+                label: const Text(
+                  "Prueba de TheCatAPI",
+                )),
           ),
+          Center(
+            child: Text(
+              "Botón temporal",
+              style: TextStyle(color: Colors.blue[900], fontSize: 12),
+            ),
+          )
         ],
       )),
+      drawer: drawerHeaderNav(title: title, context: context),
     );
   }
 }

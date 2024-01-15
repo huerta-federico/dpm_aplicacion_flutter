@@ -1,179 +1,99 @@
 import 'package:flutter/material.dart';
+import '../components.ui/navigation.dart';
 
 class PerfilScreen extends StatelessWidget {
   const PerfilScreen({super.key});
+  final String title = ('Mi perfil');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.blue[300],
-          title: Text(
-            "Mi perfil",
-            style: TextStyle(color: Colors.blue[900]),
+      backgroundColor: Colors.white,
+      appBar: headerNav(title: title, context: context),
+      body: Center(
+          child: ListView(children: [
+        const SizedBox(
+          height: 20,
+        ),
+        const Center(
+            child: Text(
+          'Inicio de sesión',
+          style: TextStyle(color: Colors.blue, fontSize: 40, shadows: [
+            Shadow(blurRadius: 20, color: Colors.blue, offset: Offset(2, 2))
+          ]),
+        )),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: TextField(
+            style: TextStyle(
+              color: Colors.blue[900],
+            ),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.blue, width: 1.0),
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              hintText: 'Escriba su correo',
+            ),
           ),
-          actions: <Widget>[
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: TextField(
+            obscureText: true,
+            style: TextStyle(
+              color: Colors.blue[900],
+            ),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.blue, width: 1.0),
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              hintText: 'Escriba su contraseña',
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                ),
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, 'home');
-                },
-                icon: const Icon(
-                  Icons.home,
-                ),
-                label: const Text(
-                  "Inicio",
-                )),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
+              ),
+              onPressed: () {},
+              icon: const Icon(Icons.login),
+              label:
+                  const Text("Iniciar sesión", style: TextStyle(fontSize: 20)),
+            ),
             const SizedBox(
               width: 10,
             ),
             ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, 'catalogo');
-                },
-                icon: const Icon(
-                  Icons.shelves,
-                ),
-                label: const Text("Catálogo")),
-            const SizedBox(
-              width: 10,
-            ),
-            ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, 'buscar');
-                },
-                icon: const Icon(
-                  Icons.search,
-                ),
-                label: const Text("Buscar")),
-            const SizedBox(
-              width: 10,
-            ),
-            ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, 'carrito');
-                },
-                icon: const Icon(
-                  Icons.shopping_cart,
-                ),
-                label: const Text("Mi carrito")),
-            const SizedBox(
-              width: 10,
-            ),
-            ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, 'perfil');
-                },
-                icon: const Icon(
-                  Icons.account_box,
-                ),
-                label: const Text("Mi perfil")),
-            const SizedBox(
-              width: 10,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.orange,
+              ),
+              onPressed: () {},
+              icon: const Icon(Icons.help),
+              label: const Text("Recuperar contraseña",
+                  style: TextStyle(fontSize: 20)),
             ),
           ],
         ),
-        body: Center(
+        const SizedBox(
+          height: 20,
+        ),
+        Center(
             child: Column(children: [
-          const SizedBox(
-            height: 20,
-          ),
-          const Text(
-            'Inicio de sesión',
-            style: TextStyle(color: Colors.blue, fontSize: 40, shadows: [
-              Shadow(blurRadius: 20, color: Colors.blue, offset: Offset(2, 2))
-            ]),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: TextField(
-              style: TextStyle(
-                color: Colors.blue[900],
-              ),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.blue, width: 1.0),
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.blue, width: 2.0),
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                hintText: 'Escriba su correo',
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: TextField(
-              obscureText: true,
-              style: TextStyle(
-                color: Colors.blue[900],
-              ),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.blue, width: 1.0),
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.blue, width: 2.0),
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-                hintText: 'Escriba su contraseña',
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                ),
-                onPressed: () {},
-                icon: const Icon(Icons.login),
-                label: const Text("Iniciar sesión",
-                    style: TextStyle(fontSize: 20)),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.orange,
-                ),
-                onPressed: () {},
-                icon: const Icon(Icons.help),
-                label: const Text("Recuperar contraseña",
-                    style: TextStyle(fontSize: 20)),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
@@ -237,9 +157,9 @@ class PerfilScreen extends StatelessWidget {
             label: const Text("Conectar con Microsoft",
                 style: TextStyle(fontSize: 20)),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-        ])));
+        ]))
+      ])),
+      drawer: drawerHeaderNav(title: title, context: context),
+    );
   }
 }
