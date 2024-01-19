@@ -70,13 +70,5 @@
     "imageUrl": "https://m.media-amazon.com/images/I/81iqNypAS-L._AC_UL320_.jpg",
     "oldPrice": "3699",
     "price": "999"
-  },
-  {
-    "id": 9,
-    "name": "Asian",
-    "category": "Men",
-    "imageUrl": "https://m.media-amazon.com/images/I/61Uu4ZpqCDL._AC_UL320_.jpg",
-    "oldPrice": "1499",
-    "price": "719"
   }
 ]

@@ -1,9 +1,78 @@
+import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../components.ui/navigation.dart';
+import 'package:dpm_aplicacion_flutter/components.ui/navigation.dart';
+import 'package:dpm_aplicacion_flutter/main.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-class PerfilScreen extends StatelessWidget {
-  const PerfilScreen({super.key});
-  final String title = ('Mi perfil');
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String title = "Iniciar sesión";
+  bool _isLoading = false;
+  bool _redirecting = false;
+  late final TextEditingController _emailController = TextEditingController();
+  late final StreamSubscription<AuthState> _authStateSubscription;
+
+  Future<void> _signIn() async {
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+      await supabase.auth.signInWithOtp(
+        email: _emailController.text.trim(),
+        emailRedirectTo:
+            kIsWeb ? null : 'io.supabase.flutterquickstart://login-callback/',
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('¡Revisa tu bandeja de entrada!')),
+        );
+        _emailController.clear();
+      }
+    } on AuthException catch (error) {
+      SnackBar(
+        content: Text(error.message),
+        backgroundColor: Theme.of(context).colorScheme.error,
+      );
+    } catch (error) {
+      SnackBar(
+        content: const Text('Error inesperado.'),
+        backgroundColor: Theme.of(context).colorScheme.error,
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
+      if (_redirecting) return;
+      final session = data.session;
+      if (session != null) {
+        _redirecting = true;
+        Navigator.of(context).pushReplacementNamed('/account');
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _authStateSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +93,13 @@ class PerfilScreen extends StatelessWidget {
         )),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: TextField(
+          child: TextFormField(
+            controller: _emailController,
             style: TextStyle(
               color: Colors.blue[900],
             ),
             decoration: InputDecoration(
+              label: Text('Email'),
               border: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.blue, width: 1.0),
                 borderRadius: BorderRadius.circular(25.0),
@@ -41,26 +112,6 @@ class PerfilScreen extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: TextField(
-            obscureText: true,
-            style: TextStyle(
-              color: Colors.blue[900],
-            ),
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.blue, width: 1.0),
-                borderRadius: BorderRadius.circular(25.0),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.blue, width: 2.0),
-                borderRadius: BorderRadius.circular(25.0),
-              ),
-              hintText: 'Escriba su contraseña',
-            ),
-          ),
-        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -69,23 +120,13 @@ class PerfilScreen extends StatelessWidget {
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.blue,
               ),
-              onPressed: () {},
               icon: const Icon(Icons.login),
-              label:
-                  const Text("Iniciar sesión", style: TextStyle(fontSize: 20)),
+              onPressed: _isLoading ? null : _signIn,
+              label: Text(_isLoading ? 'Enviando' : 'Enviar Magic Link',
+                  style: const TextStyle(fontSize: 20)),
             ),
             const SizedBox(
               width: 10,
-            ),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.orange,
-              ),
-              onPressed: () {},
-              icon: const Icon(Icons.help),
-              label: const Text("Recuperar contraseña",
-                  style: TextStyle(fontSize: 20)),
             ),
           ],
         ),

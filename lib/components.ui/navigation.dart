@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CreateAppBar {}
 
-AppBar headerNav({title, context}) {
+AppBar headerNav2({title, context}) {
   return AppBar(
     backgroundColor: Colors.blue[300],
     title: Text(
@@ -91,7 +91,7 @@ AppBar headerNav({title, context}) {
   );
 }
 
-AppBar headerNavSimple({title, context}) {
+AppBar headerNav({title, context}) {
   return AppBar(
     backgroundColor: Colors.blue[300],
     title: Text(
@@ -103,46 +103,41 @@ AppBar headerNavSimple({title, context}) {
 
 Drawer drawerHeaderNav({title, context}) {
   return Drawer(
-    child: ListView(
-      padding: EdgeInsets.zero,
-      children:[
-        ListTile(
-          title: const Text('Home'),
-          onTap: (){
-            Navigator.pushReplacementNamed(context, 'home');
-          }
-        ),
-        ListTile(
-            title: const Text('Catálogo'),
-            onTap: (){
-              Navigator.pushReplacementNamed(context, 'catalogo');
-            }
-        ),
-        ListTile(
-            title: const Text('Buscar'),
-            onTap: (){
-              Navigator.pushReplacementNamed(context, 'buscar');
-            }
-        ),
-        ListTile(
-            title: const Text('Mi carrito'),
-            onTap: (){
-              Navigator.pushReplacementNamed(context, 'carrito');
-            }
-        ),
-        ListTile(
-            title: const Text('Mi perfil'),
-            onTap: (){
-              Navigator.pushReplacementNamed(context, 'perfil');
-            }
-        ),
-        ListTile(
-            title: const Text('The Cat API'),
-            onTap: (){
-              Navigator.pushReplacementNamed(context, 'cats');
-            }
-        ),
-      ]
-    ));
-
+      child: ListView(padding: EdgeInsets.zero, children: [
+    ListTile(
+        title: const Text('Home'),
+        onTap: () {
+          Navigator.pushReplacementNamed(context, 'home');
+        }),
+    ListTile(
+        title: const Text('Catálogo'),
+        onTap: () {
+          Navigator.pushReplacementNamed(context, 'catalogo');
+        }),
+    ListTile(
+        title: const Text('Buscar'),
+        onTap: () {
+          Navigator.pushReplacementNamed(context, 'buscar');
+        }),
+    ListTile(
+        title: const Text('Mi carrito'),
+        onTap: () {
+          Navigator.pushReplacementNamed(context, 'carrito');
+        }),
+    ListTile(
+        title: const Text('Iniciar sesion'),
+        onTap: () {
+          Navigator.pushReplacementNamed(context, 'perfil');
+        }),
+    ListTile(
+        title: const Text('Panel de admin'),
+        onTap: () {
+          Navigator.pushReplacementNamed(context, 'adminRedirect');
+        }),
+    ListTile(
+        title: const Text('The Cat API'),
+        onTap: () {
+          Navigator.pushReplacementNamed(context, 'cats');
+        }),
+  ]));
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:dpm_aplicacion_flutter/microservices/catalogo/providers/provider_product.dart';
+import 'package:dpm_aplicacion_flutter/microservices/catalogo/providers/provider_shoes.dart';
 import 'package:dpm_aplicacion_flutter/microservices/catalogo/functions.dart';
-import '../components.ui/navigation.dart';
+import 'package:dpm_aplicacion_flutter/components.ui/navigation.dart';
 
-class CatalogoScreen extends StatelessWidget {
-  const CatalogoScreen({super.key});
+class ShoesListScreen extends StatelessWidget {
+  const ShoesListScreen({super.key});
   final String title = ('Catalogo');
 
   @override
@@ -18,7 +18,7 @@ class CatalogoScreen extends StatelessWidget {
           if (data.hasError) {
             return Center(child: Text("${data.error}"));
           } else if (data.hasData) {
-            var items = data.data as List<ProductDataModel>;
+            var items = data.data as List<ShoesDataModel>;
             return ListView.builder(
                 itemCount: items.isEmpty ? 0 : items.length,
                 itemBuilder: (context, index) {

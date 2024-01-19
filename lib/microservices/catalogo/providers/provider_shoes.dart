@@ -1,4 +1,4 @@
-class ProductDataModel{
+class ShoesDataModel{
   int? id;
   String? name;
   String? category;
@@ -6,7 +6,7 @@ class ProductDataModel{
   String? oldPrice;
   String? price;
 
-  ProductDataModel(
+  ShoesDataModel(
       {
         this.id,
         this.name,
@@ -16,7 +16,7 @@ class ProductDataModel{
         this.price
       });
 
-  ProductDataModel.fromJson(Map<String,dynamic> json)
+  ShoesDataModel.fromJson(Map<String,dynamic> json)
   {
     id = json['id'];
     name =json['name'];

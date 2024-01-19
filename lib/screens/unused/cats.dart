@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import '../components.ui/navigation.dart';
+import 'package:dpm_aplicacion_flutter/components.ui/navigation.dart';
 
 class CatsScreen extends StatelessWidget {
   const CatsScreen({super.key});

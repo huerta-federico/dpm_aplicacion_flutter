@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../components.ui/navigation.dart';
+import 'package:dpm_aplicacion_flutter/components.ui/navigation.dart';
 
-class CarritoScreen extends StatelessWidget {
-  const CarritoScreen({super.key});
+class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
   final String title = ('Carrito');
   static String nombreProducto = 'Nombre de producto';
 

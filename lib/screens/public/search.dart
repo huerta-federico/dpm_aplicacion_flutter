@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../components.ui/navigation.dart';
+import 'package:dpm_aplicacion_flutter/components.ui/navigation.dart';
 
-class BuscarScreen extends StatelessWidget {
-  const BuscarScreen({super.key});
+class SearchScreen extends StatelessWidget {
+  SearchScreen({super.key});
   final String title = ('Buscar');
+  final _queryController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class BuscarScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
           child: TextField(
+            controller: _queryController,
             style: TextStyle(
               color: Colors.blue[900],
             ),
@@ -40,7 +42,18 @@ class BuscarScreen extends StatelessWidget {
             foregroundColor: Colors.white,
             backgroundColor: Colors.blue,
           ),
-          onPressed: () {},
+          onPressed: () async {
+            try {
+              final query = _queryController.text.trim();
+              Navigator.of(context).pushReplacementNamed('productSearch',
+                  arguments: {'query': query});
+            } catch (error) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('Error, intenta nuevamente.'),
+                backgroundColor: Theme.of(context).colorScheme.error,
+              ));
+            }
+          },
           icon: const Icon(Icons.search),
           label: const Text("Buscar", style: TextStyle(fontSize: 20)),
         )),
