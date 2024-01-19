@@ -25,11 +25,16 @@ class ProductDetails extends StatelessWidget {
           Center(child: Text('\$ $price')),
           Center(child: Text(product.category)),
           const SizedBox(height: 20),
-          for (var item in product.images)
-            Center(
-              child:
-                  SizedBox(width: 200, height: 150, child: Image.network(item)),
-            )
+          for (int i = 0; i < product.images.length; i++)
+            Column(children: <Widget>[
+              Center(
+                child: Image(
+                  image: NetworkImage(product.images[i].toString()),
+                  fit: BoxFit.fill,
+                ),
+              ),
+              const SizedBox(height: 20),
+            ]),
         ])));
   }
 }

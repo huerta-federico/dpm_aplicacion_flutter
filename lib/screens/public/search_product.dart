@@ -20,7 +20,7 @@ class _ProductsSearchScreenState extends State<ProductsSearchScreen> {
         <String, dynamic>{}) as Map;
     String query = arguments['query'];
     return Scaffold(
-      appBar: headerNav(title: title, context: context),
+      appBar: headerNavSearch(title: title, context: context),
       body: Center(
         child: FutureBuilder<List<Product>>(
             future: ProductsDataModel().searchProduct(query),

@@ -101,6 +101,33 @@ AppBar headerNav({title, context}) {
   );
 }
 
+AppBar headerNavSearch({title, context}) {
+  return AppBar(
+    backgroundColor: Colors.blue[300],
+    title: Text(
+      title,
+      style: TextStyle(color: Colors.blue[900]),
+    ),
+    actions: <Widget>[
+      ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
+            backgroundColor: Colors.blue,
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, 'buscar');
+          },
+          icon: const Icon(
+            Icons.account_box,
+          ),
+          label: const Text("Regresar")),
+      const SizedBox(
+        width: 10,
+      )
+    ],
+  );
+}
+
 Drawer drawerHeaderNav({title, context}) {
   return Drawer(
       child: ListView(padding: EdgeInsets.zero, children: [
