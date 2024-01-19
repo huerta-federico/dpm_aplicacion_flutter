@@ -35,7 +35,7 @@ class AdminDashboardScreen extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushReplacementNamed('users');
             },
-            icon: const Icon(Icons.login),
+            icon: const Icon(Icons.people),
             label: const Text("Manage Users", style: TextStyle(fontSize: 20)),
           ),
           const SizedBox(
@@ -44,18 +44,50 @@ class AdminDashboardScreen extends StatelessWidget {
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.orange,
+              backgroundColor: Colors.blue,
             ),
             onPressed: () {
               Navigator.of(context).pushReplacementNamed('products');
             },
-            icon: const Icon(Icons.help),
+            icon: const Icon(Icons.store),
             label:
                 const Text("Manage Products", style: TextStyle(fontSize: 20)),
           ),
           const SizedBox(
             height: 10,
           ),
+
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.orange,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed('shoes');
+                },
+                icon: const Icon(Icons.developer_mode),
+                label:
+                const Text("TEST: View shoes", style: TextStyle(fontSize: 20)),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.orange,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed('cats');
+                },
+                icon: const Icon(Icons.developer_mode),
+                label:
+                const Text("TEST: The Cat API", style: TextStyle(fontSize: 20)),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
         ]))
       ])),
       drawer: drawerHeaderNav(title: title, context: context),

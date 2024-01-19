@@ -68,28 +68,6 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               )),
-          Center(
-            child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.blue,
-                ),
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, 'cats');
-                },
-                icon: const Icon(
-                  Icons.api,
-                ),
-                label: const Text(
-                  "Prueba de TheCatAPI",
-                )),
-          ),
-          Center(
-            child: Text(
-              "Botón temporal",
-              style: TextStyle(color: Colors.blue[900], fontSize: 12),
-            ),
-          )
         ],
       )),
       drawer: drawerHeaderNav(title: title, context: context),

@@ -38,7 +38,7 @@ class _UsersListScreenState extends State<UsersListScreen> {
                   return ListTile(
                       title: Text(user.email),
                       subtitle: Text('$firstName $lastName'),
-                      trailing: const Icon(Icons.chevron_left_outlined),
+                      trailing: const Icon(Icons.chevron_right_outlined),
                       onTap: (() => {openPage(context, user)}));
                 },
                 separatorBuilder: (context, index) {

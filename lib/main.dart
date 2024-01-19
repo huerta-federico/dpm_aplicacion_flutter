@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
           'buscar': (_) => SearchScreen(),
           'carrito': (_) => const CartScreen(),
           'catalogo': (_) => const ProductsListScreen(),
+          'shoes': (_) => const ShoesListScreen(),
           'perfil': (_) => const LoginScreen(),
           'splash': (_) => const SplashScreen(),
           'cats': (_) => const CatsScreen(),
@@ -52,3 +53,4 @@ class MyApp extends StatelessWidget {
         });
   }
 }
+
