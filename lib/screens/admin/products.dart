@@ -18,6 +18,7 @@ class _ProductsListScreenState extends State<ProductsListScreen> {
   @override
   void initState() {
     super.initState();
+    // Función que solicita el listado de productos
     futureProducts = ProductsDataModel().getProduct();
   }
 

@@ -16,6 +16,7 @@ class SearchScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
           child: TextField(
+            // Parámetro de búsqueda
             controller: _queryController,
             style: TextStyle(
               color: Colors.blue[900],
@@ -44,6 +45,7 @@ class SearchScreen extends StatelessWidget {
           ),
           onPressed: () async {
             try {
+              // Navegación a nueva ventana enviando el parámetro de búsqueda
               final query = _queryController.text.trim();
               Navigator.of(context).pushReplacementNamed('productSearch',
                   arguments: {'query': query});

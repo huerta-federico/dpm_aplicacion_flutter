@@ -15,6 +15,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   await Supabase.initialize(
+    // These variables will be exposed on the app, and that's completely fine since we have Row Level Security enabled on our Database.
+    // PostgreSQL's Row Level Security (RLS).
     url: 'https://qykhysiuczyziyvpvxkt.supabase.co',
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5a2h5c2l1Y3p5eml5dnB2eGt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDU1MzU4MTcsImV4cCI6MjAyMTExMTgxN30.qytiFmG1eYj_pHirbJHjNF45NzlhOwjNuS0B2sN6beI',

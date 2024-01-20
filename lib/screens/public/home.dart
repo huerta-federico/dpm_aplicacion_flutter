@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: headerNav(title: title, context: context),
       body: Center(
+        // Diseño responsivo y adaptable con ListView y otros componentes similares
           child: ListView(
         children: <Widget>[
           const SizedBox(

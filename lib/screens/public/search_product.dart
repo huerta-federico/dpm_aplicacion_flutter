@@ -23,6 +23,7 @@ class _ProductsSearchScreenState extends State<ProductsSearchScreen> {
       appBar: headerNavSearch(title: title, context: context),
       body: Center(
         child: FutureBuilder<List<Product>>(
+          // Función que solicita los resultados mediante la API
             future: ProductsDataModel().searchProduct(query),
             builder: ((context, AsyncSnapshot snapshot) {
               if (snapshot.hasData && snapshot.data != null) {
