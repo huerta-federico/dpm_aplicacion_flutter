@@ -118,7 +118,7 @@ AppBar headerNavSearch({title, context}) {
             Navigator.pushNamed(context, 'buscar');
           },
           icon: const Icon(
-            Icons.account_box,
+            Icons.arrow_back,
           ),
           label: const Text("Regresar")),
       const SizedBox(
@@ -165,6 +165,11 @@ Drawer drawerHeaderNav({title, context}) {
         title: const Text('The Cat API'),
         onTap: () {
           Navigator.pushReplacementNamed(context, 'cats');
+        }),
+    ListTile(
+        title: const Text('Galería'),
+        onTap: () {
+          Navigator.pushReplacementNamed(context, 'gallery');
         }),
   ]));
 }

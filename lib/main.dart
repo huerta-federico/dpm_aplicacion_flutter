@@ -1,6 +1,7 @@
 import 'package:dpm_aplicacion_flutter/screens/admin/admin_dashboard.dart';
 import 'package:dpm_aplicacion_flutter/screens/admin/products.dart';
 import 'package:dpm_aplicacion_flutter/screens/public/admin_redirect.dart';
+import 'package:dpm_aplicacion_flutter/screens/public/gallery.dart';
 import 'package:dpm_aplicacion_flutter/screens/public/search_product.dart';
 import 'package:dpm_aplicacion_flutter/screens/unused/cats.dart';
 import 'package:dpm_aplicacion_flutter/screens/admin/users.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           'products': (_) => const ProductsListScreen(),
           'productSearch': (_) => const ProductsSearchScreen(),
           'adminRedirect': (_) => const AdminRedirectScreen(),
+          'gallery': (_) => GalleryScreen(),
         });
   }
 }
