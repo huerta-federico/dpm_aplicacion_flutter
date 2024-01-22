@@ -3,6 +3,12 @@ import 'image_details.dart';
 import 'package:flutter/material.dart';
 import 'package:dpm_aplicacion_flutter/components.ui/navigation.dart';
 
+/*
+Basado en un tutorial de YouTube por "Flutter UI Design"
+https://www.youtube.com/watch?v=QyN2chXlCFw
+https://github.com/kaycobad/gallery_app
+*/
+
 class GalleryScreen extends StatelessWidget {
   GalleryScreen({super.key});
 
